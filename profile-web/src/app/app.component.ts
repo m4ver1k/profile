@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'profile-web';
+  private hello : Observable<object>;
+
+  constructor(private http: HttpClient) {
+   this.hello = this.http.get("http://localhost:8080/hello");
+  }
+
 }
