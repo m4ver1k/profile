@@ -33,9 +33,9 @@ describe('AppComponent', () => {
   it(`should display hello world'`, () => {
 
     fixture.detectChanges();
-    const req = httpTestingController.expectOne('http://localhost:8080/hello');
+    const req = httpTestingController.expectOne('api/hello');
     expect(req.request.method).toEqual('GET');
-    req.flush('Hello World');
+    req.flush({"msg":"Hello World"});
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.hello')).nativeElement.textContent).toContain('Hello World');
     httpTestingController.verify();

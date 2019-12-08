@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import {Msg} from "./models/models";
 
 @Component({
   selector: 'app-root',
@@ -8,10 +10,10 @@ import {Observable} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private hello : Observable<object>;
+  private hello : Observable<string>;
 
   constructor(private http: HttpClient) {
-   this.hello = this.http.get("http://localhost:8080/hello");
+    this.hello = this.http.get<Msg>("api/hello").pipe(map(e => e.msg));
   }
 
 }
