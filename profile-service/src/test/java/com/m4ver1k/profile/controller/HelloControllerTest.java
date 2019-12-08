@@ -22,6 +22,6 @@ public class HelloControllerTest {
     public void greetingShouldReturnMessageFromService() throws Exception {
 
         this.mockMvc.perform(get("/hello")).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello World")));
+                .andExpect(content().string(containsString("{\"msg\": \"Hello World\"}")));
     }
 }
