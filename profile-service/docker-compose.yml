@@ -1,0 +1,16 @@
+version: '2.4'
+services:
+  postgres:
+    image: "postgres:9.4"
+    restart: always
+    ports:
+      - "54321:5432"
+    networks:
+      - matcher
+    environment:
+      POSTGRES_USER: muser
+      POSTGRES_PASSWORD: C0mplexPwd
+      POSTGRES_DB: matcher_local
+networks:
+  matcher:
+    driver: bridge
