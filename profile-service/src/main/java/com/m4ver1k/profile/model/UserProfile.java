@@ -1,5 +1,6 @@
 package com.m4ver1k.profile.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class UserProfile {
     @Column(name = "display_name")
     private String displayName;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "name")
     private String name;
 
@@ -55,9 +57,11 @@ public class UserProfile {
     @Column(name = "figure")
     private String figure;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "marital_status")
     private String maritalStatus;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "occupation")
     private String occupation;
 
