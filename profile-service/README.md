@@ -1,4 +1,7 @@
-#Decision Records
+# Dev Setup
+- Run `docker-compose up -d` from this directory to bring up the tools necessary to run the backend service.
+
+# Decision Records
 ## `AboutMe` as separate Table
 - Considering max size of field is 5000 chars we can store separately and it won't cause latency (disk seek) or on wiret to just retrieve the profile.
 - We can also load AboutMe async with a separate API.
