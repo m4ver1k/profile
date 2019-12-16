@@ -3,6 +3,7 @@ package com.m4ver1k.profile.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
+@EqualsAndHashCode
 @NoArgsConstructor
 @TypeDef(
         name = "jsonb",
