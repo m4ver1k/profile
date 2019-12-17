@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class UserProfileService {
@@ -18,7 +19,11 @@ public class UserProfileService {
     }
 
     @Transactional
-    public UserProfile save(UserProfile userProfile){
+    public UserProfile save(UserProfile userProfile) {
         return this.userProfileRepository.save(userProfile);
+    }
+
+    public Optional<UserProfile> get(String id) {
+        return this.userProfileRepository.findById(id);
     }
 }
