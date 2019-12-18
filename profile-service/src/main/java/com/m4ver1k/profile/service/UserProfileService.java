@@ -1,5 +1,6 @@
 package com.m4ver1k.profile.service;
 
+import com.m4ver1k.profile.exception.ProfileNotFoundException;
 import com.m4ver1k.profile.model.UserProfile;
 import com.m4ver1k.profile.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,16 @@ public class UserProfileService {
     public Optional<UserProfile> get(String id) {
         return this.userProfileRepository.findById(id);
     }
+
+    public UserProfile update(String id, UserProfile userProfile) {
+
+        if (this.userProfileRepository.existsById(id)) {
+            userProfile.setProfileId(id);
+            UserProfile updatedProfile = this.save(userProfile);
+            return updatedProfile;
+        }
+
+        throw new ProfileNotFoundException("No Profile Found with ID " + id);
+    }
+
 }

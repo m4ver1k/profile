@@ -27,6 +27,7 @@ public class UserProfile {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "profile_id")
+    @Setter
     private String profileId;
 
     @Column(name = "display_name")

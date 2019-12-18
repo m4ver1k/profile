@@ -1,7 +1,9 @@
 package com.m4ver1k.profile.service;
 
+import com.m4ver1k.profile.exception.ProfileNotFoundException;
 import com.m4ver1k.profile.model.UserProfile;
 import com.m4ver1k.profile.repository.UserProfileRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -21,10 +23,13 @@ public class UserProfileServiceTest {
     @MockBean
     private UserProfileRepository userProfileRepository;
 
+    @Before
+    public void setUp() throws Exception {
+        this.userProfileService = new UserProfileService(this.userProfileRepository);
+    }
+
     @Test
     public void should_save_and_return_profile() {
-
-        this.userProfileService = new UserProfileService(this.userProfileRepository);
 
         UserProfile userProfile = new UserProfile("", "dname2", "adarsh2", "/pathtopic/jpg", LocalDate.now(), "male", "asian", "na", 123, "fat", "married", "sodt dev", "adasdasdasdasd", "{}");
 
@@ -38,7 +43,6 @@ public class UserProfileServiceTest {
 
     @Test
     public void should_return_if_profile_exist() {
-        this.userProfileService = new UserProfileService(this.userProfileRepository);
 
         UserProfile userProfile = new UserProfile("", "dname2", "adarsh2", "/pathtopic/jpg", LocalDate.now(), "male", "asian", "na", 123, "fat", "married", "sodt dev", "adasdasdasdasd", "{}");
 
@@ -52,8 +56,6 @@ public class UserProfileServiceTest {
 
     @Test
     public void should_return_empty_optional_when_no_profile_exist() {
-        this.userProfileService = new UserProfileService(this.userProfileRepository);
-
 
         Mockito.when(this.userProfileRepository.findById("1234"))
                 .thenReturn(Optional.empty());
@@ -63,4 +65,32 @@ public class UserProfileServiceTest {
         assertTrue(response.isPresent() == false);
     }
 
+    @Test
+    public void should_update_existing_profile() {
+
+        UserProfile request = new UserProfile("", "dname2", "adarsh2", "/pathtopic/jpg", LocalDate.now(), "male", "asian", "na", 123, "fat", "married", "sodt dev", "adasdasdasdasd", "{}");
+        UserProfile userProfile = new UserProfile("1234", "dname2", "adarsh2", "/pathtopic/jpg", LocalDate.now(), "male", "asian", "na", 123, "fat", "married", "sodt dev", "adasdasdasdasd", "{}");
+
+        Mockito.when(this.userProfileRepository.existsById("1234"))
+                .thenReturn(true);
+
+        Mockito.when(this.userProfileRepository.save(userProfile))
+                .thenReturn(userProfile);
+
+        UserProfile response = this.userProfileService.update("1234", request);
+
+        assertEquals("1234", response.getProfileId());
+
+    }
+
+    @Test(expected = ProfileNotFoundException.class)
+    public void should_throw_exception_when_profile_dont_exist() {
+
+        UserProfile request = new UserProfile("", "dname2", "adarsh2", "/pathtopic/jpg", LocalDate.now(), "male", "asian", "na", 123, "fat", "married", "sodt dev", "adasdasdasdasd", "{}");
+
+        Mockito.when(this.userProfileRepository.existsById("1234"))
+                .thenReturn(false);
+
+        this.userProfileService.update("1234", request);
+    }
 }
