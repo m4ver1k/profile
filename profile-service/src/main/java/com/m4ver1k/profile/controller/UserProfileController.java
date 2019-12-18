@@ -3,10 +3,7 @@ package com.m4ver1k.profile.controller;
 import com.m4ver1k.profile.model.UserProfile;
 import com.m4ver1k.profile.service.UserProfileService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -20,9 +17,16 @@ public class UserProfileController {
     }
 
     @PostMapping
-    public ResponseEntity<UserProfile> save(@RequestBody UserProfile userProfile) {
+    public ResponseEntity<UserProfile> create(@RequestBody UserProfile userProfile) {
         UserProfile savedProfile = this.userProfileService.save(userProfile);
         return ResponseEntity.created(URI.create("/api/v1/profiles/"+savedProfile.getProfileId())).body(savedProfile);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserProfile> update(@PathVariable String id,@RequestBody UserProfile userProfile) {
+
+        UserProfile savedProfile = this.userProfileService.update(id,userProfile);
+        return ResponseEntity.ok(savedProfile);
     }
 
 }
