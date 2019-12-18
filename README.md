@@ -1,5 +1,5 @@
 # profile
-Editable profile problem for Spark Networks Interview
+Editable profile
 
 # Dev Setup
 ## Setup githooks
