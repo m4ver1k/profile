@@ -2,7 +2,6 @@ import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";
-import {Component} from "@angular/core";
 import {By} from "@angular/platform-browser";
 
 describe('AppComponent', () => {
