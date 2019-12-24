@@ -1,8 +1,8 @@
 import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {HttpClient} from "@angular/common/http";
-import {By} from "@angular/platform-browser";
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpClient} from '@angular/common/http';
+import {By} from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   let httpClient: HttpClient;
@@ -34,7 +34,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const req = httpTestingController.expectOne('api/hello');
     expect(req.request.method).toEqual('GET');
-    req.flush({"msg":"Hello World"});
+    req.flush({msg: 'Hello World'});
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.hello')).nativeElement.textContent).toContain('Hello World');
     httpTestingController.verify();
